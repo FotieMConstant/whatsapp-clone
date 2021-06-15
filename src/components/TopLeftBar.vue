@@ -3,7 +3,7 @@
     <v-app-bar elevation="0" class="pa-2" height="auto" dense>
       <div>
         <v-avatar size="40">
-          <img src="https://cdn.vuetifyjs.com/images/john.jpg" alt="John" />
+          <img src="https://avatars.githubusercontent.com/u/42372656?v=4" alt="fotiecodes" />
         </v-avatar>
       </div>
 
