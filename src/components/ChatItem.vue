@@ -6,7 +6,7 @@
           <img :src="chat.displayPicture" alt="fotiecodes" />
         </v-avatar>
       </v-col>
-      <v-col cols="12" sm="6" md="8">
+      <v-col cols="5" sm="6" md="8">
         <div class="mt-1">
           <p>{{chat.name}}</p>
           <div class="text--disabled mt-n3 caption">

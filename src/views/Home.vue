@@ -1,7 +1,7 @@
 <template>
   <span>
     <v-row no-gutters>
-      <v-col cols="6" md="4">
+      <v-col cols="12" md="4">
         <v-card outlined tile>
           <!-- top left bar -->
           <TopLeftBar />
