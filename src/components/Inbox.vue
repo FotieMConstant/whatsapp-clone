@@ -56,7 +56,7 @@
     <!-- end chat area -->
     <!-- chat input field -->
     <v-container class="grey lighten-5 __chatInput">
-      <v-row class="mt-1 ml-1 mr-1">
+      <v-row class="mt-0 ml-1 mb-n3">
         <span class="mt-1">
           <v-btn icon>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
@@ -75,18 +75,14 @@
             </svg>
           </v-btn>
         </span>
-        <v-text-field
-          class="__messageBox"
-          flat
-          label="Search or start new chat"
-          rounded
-          solo
-          prepend-inner-icon="mdi-magnify"
-        ></v-text-field>
+        <v-text-field class="__messageBox" flat placeholder="Type a message" rounded solo dense></v-text-field>
+        <v-btn icon class="ml-2 mt-1">
+          <v-icon>mdi-microphone</v-icon>
+        </v-btn>
       </v-row>
     </v-container>
     <!-- end chat input field -->
-    <!-- right click on text area-->
+    <!-- right click on chat area-->
     <v-menu
       v-model="showMenu"
       :position-x="x"
@@ -115,7 +111,7 @@
         </v-list-item>
       </v-list>
     </v-menu>
-    <!-- end right click on text area -->
+    <!-- end right click on chat area -->
   </div>
 </template>
 <script>
@@ -128,12 +124,6 @@ export default {
       showMenu: false,
       x: 0,
       y: 0,
-      items: [
-        { title: "Click Me" },
-        { title: "Click Me" },
-        { title: "Click Me" },
-        { title: "Click Me 2" },
-      ],
     };
   },
   methods: {
@@ -155,7 +145,8 @@ export default {
   cursor: pointer;
 }
 .__theChat {
-  height: 550px;
+  height: 518px;
+  position: absolute;
   width: 100%;
   background-image: url("https://whatsapp-73989.web.app/static/media/bg.2d472127.png");
   background-repeat: no-repeat;
@@ -167,9 +158,10 @@ export default {
   width: 100%;
 }
 .__chatInput {
-  margin-top: -40px;
+  position: fixed;
+  bottom: -16px;
 }
 .__messageBox {
-  width: 50%;
+  max-width: 65%;
 }
 </style>

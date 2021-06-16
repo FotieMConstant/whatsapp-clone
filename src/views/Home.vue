@@ -144,9 +144,9 @@ export default {
   background: rgba(0, 0, 0, 0.2);
 }
 /* Handle on hover */
-.__sideChatList::-webkit-scrollbar-thumb:hover {
+/* .__sideChatList::-webkit-scrollbar-thumb:hover {
   background: rgb(156, 156, 156);
-}
+} */
 .__chatItem {
   cursor: pointer;
 }

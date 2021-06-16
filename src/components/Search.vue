@@ -4,7 +4,7 @@
       <v-text-field
         class="mb-n5"
         flat
-        label="Search or start new chat"
+        placeholder="Search or start new chat"
         rounded
         solo
         dense
