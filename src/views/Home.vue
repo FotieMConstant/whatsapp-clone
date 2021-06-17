@@ -8,13 +8,13 @@
           <Search />
           <div class="__sideChatList">
             <span v-for="chat in chatsList" :key="chat.id" class="__chatItem">
-              <ChatItem :chat="chat" />
+              <ChatItem :chat="chat" @onClickToViewInboxFromChild="returnChatObject" />
             </span>
           </div>
         </v-card>
       </v-col>
       <v-col cols="12" md="8">
-        <Inbox />
+        <Inbox :chat="chatObjectToViewInInbox" />
       </v-col>
     </v-row>
   </span>
@@ -37,26 +37,85 @@ export default {
   },
   data() {
     return {
+      chatObjectToViewInInbox: {
+        id: 0,
+        name: "Kelly",
+        lastMessage: "Hey man, what's up?",
+        lastTextTime: "Yesterday",
+        totalMessagesInChat: 7,
+        blueCheck: true,
+        lastSeen: "online",
+        displayPicture:
+          "https://s11.favim.com/orig/7/766/7668/76682/black-girls-profile-kinky-hair-Favim.com-7668211.jpg",
+        messages: [
+          {
+            received: "Hey man",
+            sent: "Hey, sup?",
+          },
+          {
+            received: "Yumm! Yammy, i guess you enjoyed, lol",
+            sent: "Not really, was not enough for me.. lol😂😂",
+          },
+          {
+            received: "😂 ... as much as i thought",
+            sent: "... you know me!",
+          },
+        ],
+      }, // variabe to keep the preview chat in inbox
       chatsList: [
         {
           id: 0,
-          name: "fotiecodes",
-          lastMessage: "Yooo gee",
+          name: "Kelly",
+          lastMessage: "Hey man, what's up?",
           lastTextTime: "Yesterday",
           totalMessagesInChat: 7,
           blueCheck: true,
+          lastSeen: "online",
           displayPicture:
-            "https://avatars.githubusercontent.com/u/42372656?v=4",
+            "https://s11.favim.com/orig/7/766/7668/76682/black-girls-profile-kinky-hair-Favim.com-7668211.jpg",
+          messages: [
+            {
+              received: "Hey man",
+              sent: "Hey, sup?",
+            },
+            {
+              received: "Yumm! Yammy, i guess you enjoyed, lol",
+              sent: "Not really, was not enough for me.. lol😂😂",
+            },
+            {
+              received: "😂 ... as much as i thought",
+              sent: "... you know me!",
+            },
+          ],
         },
         {
           id: 1,
-          name: "HSKK初级考试班级群",
+          name: "好朋友",
           lastMessage: "同学们好！谁用微信？",
           lastTextTime: "15:30",
           totalMessagesInChat: 1,
           blueCheck: true,
+          lastSeen: "14:50",
           displayPicture:
             "https://blog.keatschinese.com/wp-content/uploads/2020/12/learning-the-chinese-language.jpg",
+          messages: [
+            {
+              received: "你好",
+              sent: "你好,怎么样?",
+            },
+            {
+              received: "好久不见",
+              sent: "对呀, 好久不见! 你最近在忙什么？",
+            },
+            {
+              received: "没什么，你呢？",
+              sent: "一样的，没什么特别的!",
+            },
+            {
+              received: "好的, 你什么时候回中国?",
+              sent: "我还不确定什么时候, 但我一定会让你知道!",
+            },
+          ],
         },
         {
           id: 2,
@@ -65,8 +124,28 @@ export default {
           lastTextTime: "07:15",
           totalMessagesInChat: 12,
           blueCheck: false,
+          lastSeen: "18:40",
           displayPicture:
             "https://pbs.twimg.com/profile_images/1172588555966844933/GD3slkzF_400x400.jpg",
+          messages: [
+            {
+              received: "Yo bro",
+              sent: "Yo",
+            },
+            {
+              received: "What's up?",
+              sent: "nothing much",
+            },
+            {
+              received:
+                "I heard you are building a whatapp clone, lol! Courage! Hehehe",
+              sent: "Yeah i am, and almost done, just working on the ui tho, no backend",
+            },
+            {
+              received: "Oh, i see",
+              sent: "yeah",
+            },
+          ],
         },
         {
           id: 3,
@@ -75,51 +154,103 @@ export default {
           lastTextTime: "Yesterday",
           totalMessagesInChat: 1,
           blueCheck: false,
+          lastSeen: "1:10",
           displayPicture:
             "https://avatars.githubusercontent.com/u/44490676?v=4",
+          messages: [
+            {
+              received: "Yo Wowo man",
+              sent: "Yo man",
+            },
+            {
+              received: "You fit get 5k for your momo?",
+              sent: "No man, sorry!",
+            },
+            {
+              received: "No worries man, ah go hustle different man",
+              sent: "okay pa!",
+            },
+            {
+              received: "Thanks though",
+              sent: "No problem",
+            },
+          ],
         },
         {
           id: 4,
-          name: "fotiecodes",
-          lastMessage: "Yooo gee",
-          lastTextTime: "Yesterday",
+          name: "Wise Man",
+          lastMessage: "Bonjour boss",
+          lastTextTime: "Today",
           totalMessagesInChat: 15,
           blueCheck: false,
+          lastSeen: "09:50",
           displayPicture:
-            "https://avatars.githubusercontent.com/u/42372656?v=4",
+            "https://scontent-mia3-2.xx.fbcdn.net/v/t1.6435-9/84344710_2670283533089122_8563703457196802048_n.jpg?_nc_cat=103&ccb=1-3&_nc_sid=09cbfe&_nc_eui2=AeFxCXRixyMYvbpiB2FgVrd4NrDlHB9fwh82sOUcH1_CH8jJft9hB_TPHOL4k6u1U2pViviffRaDA6jYam4jOOTC&_nc_ohc=O6iegNbeYzEAX_1rUqD&tn=5Ushp77egCFD4k9U&_nc_ht=scontent-mia3-2.xx&oh=446b9a57395606b91581357ee8379425&oe=60D06711",
         },
         {
           id: 5,
-          name: "fotiecodes",
-          lastMessage: "Yooo gee",
+          name: "Catherine",
+          lastMessage: "Hey babe",
           lastTextTime: "Yesterday",
           totalMessagesInChat: 1,
-          blueCheck: true,
+          blueCheck: false,
+          lastSeen: "online",
           displayPicture:
-            "https://avatars.githubusercontent.com/u/42372656?v=4",
+            "https://andybesttv.files.wordpress.com/2017/04/78fd2-18161354_105280080040548_4811051244892192768_n.jpg",
+          messages: [
+            {
+              received: "Hey bb",
+              sent: "Hey, sup?",
+            },
+            {
+              received: "Nothing much, just got home, wbu?",
+              sent: "Still at work!",
+            },
+            {
+              received: "Oh, wow! what did you take for lunch today?",
+              sent: "bread and spaghetti",
+            },
+            {
+              received: "Yumm! Yammy, i guess you enjoyed, lol",
+              sent: "Not really, was not enough for me.. lol😂😂",
+            },
+            {
+              received: "😂 ... as much as i thought",
+              sent: "... you know me!",
+            },
+          ],
         },
         {
           id: 6,
-          name: "fotiecodes",
-          lastMessage: "Yooo gee",
+          name: "Mom",
+          lastMessage: "How was your night?",
           lastTextTime: "Yesterday",
           totalMessagesInChat: 10,
           blueCheck: false,
+          lastSeen: "14:13",
           displayPicture:
-            "https://avatars.githubusercontent.com/u/42372656?v=4",
+            "https://www.cyphercoders.com/sites/default/files/default_images/default-user-icon-4.jpg",
         },
         {
           id: 7,
-          name: "fotiecodes",
-          lastMessage: "Yooo gee",
+          name: "Elvis Pirata",
+          lastMessage: "Nice work man",
           lastTextTime: "Yesterday",
           totalMessagesInChat: 3,
           blueCheck: false,
+          lastSeen: "online",
           displayPicture:
-            "https://avatars.githubusercontent.com/u/42372656?v=4",
+            "https://www.cyphercoders.com/sites/default/files/default_images/default-user-icon-4.jpg",
         },
       ],
     };
+  },
+  methods: {
+    // getting the data from child component
+    returnChatObject(chatObjectFromChildComponent) {
+      console.log(chatObjectFromChildComponent);
+      this.chatObjectToViewInInbox = chatObjectFromChildComponent;
+    },
   },
 };
 </script>

@@ -3,10 +3,11 @@
     <v-app-bar elevation="0" class="pa-2 __statusBar" height="auto" dense>
       <div>
         <v-avatar size="40">
-          <img src="https://avatars.githubusercontent.com/u/42372656?v=4" alt="fotiecodes" />
+          <img :src="chat.displayPicture" :alt="chat.name" />
         </v-avatar>
-        <span class="ml-3 mt-n2">fotiecodes</span>
-        <div class="text--disabled caption ml-13 mt-n3">last seen today at 20:48</div>
+        <span class="ml-3 mt-n2">{{chat.name}}</span>
+        <div v-if="chat.lastSeen=== 'online'" class="text--disabled caption ml-13 mt-n3">Online</div>
+        <div v-else class="text--disabled caption ml-13 mt-n3">last seen today at {{chat.lastSeen}}</div>
       </div>
 
       <v-spacer></v-spacer>
@@ -53,7 +54,7 @@
     </v-app-bar>
     <!-- chat area -->
     <div class="conversation-container __areaPortrait" @contextmenu="show">
-      <Message message="Hi there bro" timeStamp="15:25" me />
+      <!-- <Message message="Hi there bro" timeStamp="15:25" me />
       <Message message="Yo, what's up man?" timeStamp="15:28" />
       <Message message="Nothing much man, just work, pretty busy lately!" timeStamp="15:28" me />
       <Message message="Keep it pushing bro, i know it's not easy!" timeStamp="15:28" />
@@ -71,7 +72,11 @@
       <Message message="I trust you will do just great bro. keep it going" timeStamp="15:28" me />
       <Message message="Thanks man!" timeStamp="15:28" />
       <Message message="No problem" timeStamp="15:28" me />
-      <Message message="👍🏿" timeStamp="15:28" />
+      <Message message="👍🏿" timeStamp="15:28" />-->
+      <span v-for="chatMessage in chat.messages" :key="chatMessage">
+        <Message :message="chatMessage.received" timeStamp="15:28" />
+        <Message :message="chatMessage.sent" timeStamp="15:28" me />
+      </span>
     </div>
     <!-- end chat area -->
     <!-- chat input field -->

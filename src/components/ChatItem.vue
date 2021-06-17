@@ -1,5 +1,5 @@
 <template>
-  <v-container id="__chat">
+  <v-container id="__chat" @click="onClickToViewInbox">
     <v-row>
       <v-col cols="2" md="2">
         <v-avatar size="55">
@@ -38,6 +38,16 @@ export default {
     // function to Truncate text to fit in 3 lines and show three dots in end In Html
     truncate(text, size = 40) {
       return text.length > size ? text.slice(0, size - 1) + "..." : text;
+    },
+
+    // emit chatId to the parent component on click
+    onClickToViewInbox() {
+      this.dialogDelete = false;
+      console.log(
+        "onClickToViewInbox from child component => " +
+          JSON.stringify(this.chat.id)
+      );
+      this.$emit("onClickToViewInboxFromChild", this.chat); //emiting to the parent which todo to be deleted
     },
   },
 };
