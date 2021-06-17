@@ -2,9 +2,11 @@
   <div>
     <v-app-bar elevation="0" class="pa-2" height="auto" dense>
       <div>
-        <v-avatar size="40">
-          <img src="https://avatars.githubusercontent.com/u/42372656?v=4" alt="fotiecodes" />
-        </v-avatar>
+        <v-btn icon>
+          <v-avatar size="40">
+            <img src="https://avatars.githubusercontent.com/u/42372656?v=4" alt="fotiecodes" />
+          </v-avatar>
+        </v-btn>
       </div>
 
       <v-spacer></v-spacer>

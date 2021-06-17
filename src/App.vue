@@ -16,3 +16,10 @@ export default {
   },
 };
 </script>
+
+<style>
+/* hide scroll bar but keep functionality */
+body::-webkit-scrollbar {
+  display: none;
+}
+</style>

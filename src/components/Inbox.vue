@@ -52,7 +52,27 @@
       </v-menu>
     </v-app-bar>
     <!-- chat area -->
-    <div class="__theChat __areaPortrait" @contextmenu="show"></div>
+    <div class="conversation-container __areaPortrait" @contextmenu="show">
+      <Message message="Hi there bro" timeStamp="15:25" me />
+      <Message message="Yo, what's up man?" timeStamp="15:28" />
+      <Message message="Nothing much man, just work, pretty busy lately!" timeStamp="15:28" me />
+      <Message message="Keep it pushing bro, i know it's not easy!" timeStamp="15:28" />
+      <Message me message="Thanks man, How di your exams go?" timeStamp="15:28" />
+      <Message
+        message="Not bad, i could answer most of the question on the exams sheet!"
+        timeStamp="15:28"
+      />
+      <Message
+        message="Correct! i like that, we should be expecting good grades then"
+        timeStamp="15:28"
+        me
+      />
+      <Message message="Hopefully man, hopefully" timeStamp="15:28" />
+      <Message message="I trust you will do just great bro. keep it going" timeStamp="15:28" me />
+      <Message message="Thanks man!" timeStamp="15:28" />
+      <Message message="No problem" timeStamp="15:28" me />
+      <Message message="👍🏿" timeStamp="15:28" />
+    </div>
     <!-- end chat area -->
     <!-- chat input field -->
     <v-container class="grey lighten-5 __chatInput">
@@ -115,7 +135,11 @@
   </div>
 </template>
 <script>
+import Message from "../components/Message";
 export default {
+  components: {
+    Message,
+  },
   props: {
     chat: Object,
   },
@@ -127,6 +151,7 @@ export default {
     };
   },
   methods: {
+    // function to show the menu when the user right clicks
     show(e) {
       e.preventDefault();
       this.showMenu = false;
@@ -144,13 +169,23 @@ export default {
 .__statusBar {
   cursor: pointer;
 }
-.__theChat {
+.conversation-container {
   height: 518px;
   position: absolute;
   width: 100%;
   background-image: url("https://whatsapp-73989.web.app/static/media/bg.2d472127.png");
   background-repeat: no-repeat;
   background-size: cover;
+  overflow-y: scroll;
+  overflow-x: hidden; /* to make it scrollable */
+}
+.conversation-container::-webkit-scrollbar {
+  width: 6px;
+  height: 6px !important;
+}
+/* Handle */
+.conversation-container::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
 }
 .__areaPortrait.div {
   margin: 0 auto;
