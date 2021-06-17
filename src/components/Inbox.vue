@@ -171,7 +171,6 @@ export default {
 }
 .conversation-container {
   height: 518px;
-  position: absolute;
   width: 100%;
   background-image: url("https://whatsapp-73989.web.app/static/media/bg.2d472127.png");
   background-repeat: no-repeat;

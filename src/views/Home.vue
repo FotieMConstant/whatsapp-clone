@@ -13,10 +13,8 @@
           </div>
         </v-card>
       </v-col>
-      <v-col cols="12" sm="6" md="8">
-        <v-card elevation="0">
-          <Inbox />
-        </v-card>
+      <v-col cols="12" md="8">
+        <Inbox />
       </v-col>
     </v-row>
   </span>
