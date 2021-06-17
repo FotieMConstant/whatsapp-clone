@@ -46,36 +46,18 @@
           <v-list-item @click="() => {}">
             <v-list-item-title>Clear messages</v-list-item-title>
           </v-list-item>
-          <v-list-item @click="() => {}">
+          <v-list-item @click="deleteChat">
             <v-list-item-title>Delete chat</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
     </v-app-bar>
     <!-- chat area -->
-    <div class="conversation-container __areaPortrait" @contextmenu="show">
-      <!-- <Message message="Hi there bro" timeStamp="15:25" me />
-      <Message message="Yo, what's up man?" timeStamp="15:28" />
-      <Message message="Nothing much man, just work, pretty busy lately!" timeStamp="15:28" me />
-      <Message message="Keep it pushing bro, i know it's not easy!" timeStamp="15:28" />
-      <Message me message="Thanks man, How di your exams go?" timeStamp="15:28" />
-      <Message
-        message="Not bad, i could answer most of the question on the exams sheet!"
-        timeStamp="15:28"
-      />
-      <Message
-        message="Correct! i like that, we should be expecting good grades then"
-        timeStamp="15:28"
-        me
-      />
-      <Message message="Hopefully man, hopefully" timeStamp="15:28" />
-      <Message message="I trust you will do just great bro. keep it going" timeStamp="15:28" me />
-      <Message message="Thanks man!" timeStamp="15:28" />
-      <Message message="No problem" timeStamp="15:28" me />
-      <Message message="👍🏿" timeStamp="15:28" />-->
-      <span v-for="chatMessage in chat.messages" :key="chatMessage">
-        <Message :message="chatMessage.received" timeStamp="15:28" />
-        <Message :message="chatMessage.sent" timeStamp="15:28" me />
+    <div ref="messagesContainer" class="conversation-container __areaPortrait" @contextmenu="show">
+      <span v-for="(chatMessage, index) in chat.messages" :class="`index-${index}`" :key="index">
+        <!-- checking to make sure the received or sent actually contain data -->
+        <Message v-if="chatMessage.received" :message="chatMessage.received" timeStamp="15:28" />
+        <Message v-if="chatMessage.sent" :message="chatMessage.sent" timeStamp="15:28" me />
       </span>
     </div>
     <!-- end chat area -->
@@ -100,7 +82,9 @@
             </svg>
           </v-btn>
         </span>
-        <v-text-field class="__messageBox" flat placeholder="Type a message" rounded solo dense></v-text-field>
+        <v-form @submit="sendMessage" id="__sendMessageForm">
+          <v-text-field v-model="messageBody" flat placeholder="Type a message" rounded solo dense></v-text-field>
+        </v-form>
         <v-btn icon class="ml-2 mt-1">
           <v-icon>mdi-microphone</v-icon>
         </v-btn>
@@ -131,7 +115,7 @@
         <v-list-item @click="() => {}">
           <v-list-item-title>Clear messages</v-list-item-title>
         </v-list-item>
-        <v-list-item @click="() => {}">
+        <v-list-item @click="deleteChat">
           <v-list-item-title>Delete chat</v-list-item-title>
         </v-list-item>
       </v-list>
@@ -147,9 +131,11 @@ export default {
   },
   props: {
     chat: Object,
+    chatsList: Array,
   },
   data() {
     return {
+      messageBody: "", // message the user types to send in chat
       showMenu: false,
       x: 0,
       y: 0,
@@ -166,6 +152,46 @@ export default {
         this.showMenu = true;
       });
     },
+    // function to send message
+    sendMessage(event) {
+      event.preventDefault();
+      console.log("sending message => " + this.messageBody);
+      // pushing the messaged entered to the chat.messages array of the chat object
+      this.chat.messages.push({
+        received: null,
+        sent: this.messageBody,
+      });
+      console.log(this.chat);
+      this.chat.lastMessage = this.messageBody; // updating the last message on the chats list with the last message sent
+      this.messageBody = ""; // setting the vatiable back to empty string wen done
+    },
+    // function to scroll to the buttom automatically
+    scrollToElement() {
+      var content = this.$refs.messagesContainer; // get the container to be scrolled in
+      content.scrollTop = content.scrollHeight; // making the scrollHeight the scroll top
+      console.log(
+        "scroll height is " +
+          content.scrollHeight +
+          " scroll Top is " +
+          content.scrollTop
+      );
+    },
+    deleteChat() {
+      console.log("deleteChat");
+      this.chatsList.map((item, index) => {
+        if (item.id == this.chat.id) {
+          this.chatsList.splice(index, 1);
+        }
+      });
+    },
+  },
+  // update hook
+  // read this better understant https://v3.vuejs.org/api/options-lifecycle-hooks.html#updated
+
+  updated() {
+    // using $nextTick makes Code that will run only after the
+    // entire view has been re-rendered
+    this.$nextTick(() => this.scrollToElement());
   },
 };
 </script>
@@ -200,7 +226,8 @@ export default {
   position: fixed;
   bottom: -16px;
 }
-.__messageBox {
-  max-width: 65%;
+
+#__sendMessageForm {
+  width: 66%;
 }
 </style>

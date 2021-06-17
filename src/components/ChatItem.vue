@@ -18,7 +18,8 @@
       </v-col>
       <v-col class="caption" sm="2" md="2">
         <div class="mt-1 d-flex justify-end">{{chat.lastTextTime}}</div>
-        <div class="d-flex justify-end">
+        <!-- only display the badge if there are messages in inbox -->
+        <div v-if="chat.totalMessagesInChat != 0" class="d-flex justify-end">
           <v-badge color="green" :content="chat.totalMessagesInChat" class="mt-2" inline></v-badge>
         </div>
       </v-col>

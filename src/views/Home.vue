@@ -14,7 +14,7 @@
         </v-card>
       </v-col>
       <v-col cols="12" md="8">
-        <Inbox :chat="chatObjectToViewInInbox" />
+        <Inbox :chat="chatObjectToViewInInbox" :chatsList="chatsList" />
       </v-col>
     </v-row>
   </span>
@@ -37,31 +37,7 @@ export default {
   },
   data() {
     return {
-      chatObjectToViewInInbox: {
-        id: 0,
-        name: "Kelly",
-        lastMessage: "Hey man, what's up?",
-        lastTextTime: "Yesterday",
-        totalMessagesInChat: 7,
-        blueCheck: true,
-        lastSeen: "online",
-        displayPicture:
-          "https://s11.favim.com/orig/7/766/7668/76682/black-girls-profile-kinky-hair-Favim.com-7668211.jpg",
-        messages: [
-          {
-            received: "Hey man",
-            sent: "Hey, sup?",
-          },
-          {
-            received: "Yumm! Yammy, i guess you enjoyed, lol",
-            sent: "Not really, was not enough for me.. lol😂😂",
-          },
-          {
-            received: "😂 ... as much as i thought",
-            sent: "... you know me!",
-          },
-        ],
-      }, // variabe to keep the preview chat in inbox
+      chatObjectToViewInInbox: {}, // variable to keep the preview chat in inbox
       chatsList: [
         {
           id: 0,
@@ -186,6 +162,7 @@ export default {
           lastSeen: "09:50",
           displayPicture:
             "https://scontent-mia3-2.xx.fbcdn.net/v/t1.6435-9/84344710_2670283533089122_8563703457196802048_n.jpg?_nc_cat=103&ccb=1-3&_nc_sid=09cbfe&_nc_eui2=AeFxCXRixyMYvbpiB2FgVrd4NrDlHB9fwh82sOUcH1_CH8jJft9hB_TPHOL4k6u1U2pViviffRaDA6jYam4jOOTC&_nc_ohc=O6iegNbeYzEAX_1rUqD&tn=5Ushp77egCFD4k9U&_nc_ht=scontent-mia3-2.xx&oh=446b9a57395606b91581357ee8379425&oe=60D06711",
+          messages: [],
         },
         {
           id: 5,
@@ -230,6 +207,7 @@ export default {
           lastSeen: "14:13",
           displayPicture:
             "https://www.cyphercoders.com/sites/default/files/default_images/default-user-icon-4.jpg",
+          messages: [],
         },
         {
           id: 7,
@@ -241,6 +219,7 @@ export default {
           lastSeen: "online",
           displayPicture:
             "https://www.cyphercoders.com/sites/default/files/default_images/default-user-icon-4.jpg",
+          messages: [],
         },
       ],
     };
@@ -250,6 +229,26 @@ export default {
     returnChatObject(chatObjectFromChildComponent) {
       console.log(chatObjectFromChildComponent);
       this.chatObjectToViewInInbox = chatObjectFromChildComponent;
+
+      // setting the number of chats on the chat list to zero
+      // when the user clicks on it to simulate whatsapp experience
+      this.chatsList.map((item) => {
+        // setting only for that particular element in array
+        if (item.id == chatObjectFromChildComponent.id) {
+          item.totalMessagesInChat = 0;
+        }
+      });
+    },
+  },
+  mounted: function () {
+    // setting the first chat inbox with the first user in the array
+    this.chatObjectToViewInInbox = this.chatsList[0];
+    console.log(this.chatsList[0]);
+  },
+  // watch for changes in the array to update it like for ondelete of a chat action (so i can data with the furst chat)
+  watch: {
+    chatsList: function () {
+      this.chatObjectToViewInInbox = this.chatsList[0]; // updating with the first chat in array
     },
   },
 };
