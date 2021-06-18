@@ -56,8 +56,17 @@
     <div ref="messagesContainer" class="conversation-container __areaPortrait" @contextmenu="show">
       <span v-for="(chatMessage, index) in chat.messages" :class="`index-${index}`" :key="index">
         <!-- checking to make sure the received or sent actually contain data -->
-        <Message v-if="chatMessage.received" :message="chatMessage.received" timeStamp="15:28" />
-        <Message v-if="chatMessage.sent" :message="chatMessage.sent" timeStamp="15:28" me />
+        <Message
+          v-if="chatMessage.received"
+          :message="chatMessage.received"
+          :timeStamp="chatMessage.timeStampReceived"
+        />
+        <Message
+          v-if="chatMessage.sent"
+          :message="chatMessage.sent"
+          :timeStamp="chatMessage.timeStampSent"
+          me
+        />
       </span>
     </div>
     <!-- end chat area -->
@@ -156,14 +165,24 @@ export default {
     sendMessage(event) {
       event.preventDefault();
       console.log("sending message => " + this.messageBody);
+
+      // get the current time we will use in sending the message
+      const time = new Date();
+
+      let hh = time.getHours();
+      let mm = time.getMinutes();
+      let timeStamp = hh + ":" + mm;
       // pushing the messaged entered to the chat.messages array of the chat object
       this.chat.messages.push({
         received: null,
         sent: this.messageBody,
+        timeStampSent: timeStamp, // current time included in sent message
+        timeStampReceived: null,
       });
       console.log(this.chat);
       this.chat.lastMessage = this.messageBody; // updating the last message on the chats list with the last message sent
-      this.messageBody = ""; // setting the vatiable back to empty string wen done
+      this.chat.lastTextTime = timeStamp; // updating the lastTextTime in chatList
+      this.messageBody = ""; // setting the vatiable back to empty string when done
     },
     // function to scroll to the buttom automatically
     scrollToElement() {

@@ -5,7 +5,7 @@
         <v-card outlined tile>
           <!-- top left bar -->
           <TopLeftBar />
-          <Search />
+          <Search @onFilterFromChild="filterChatList" />
           <div class="__sideChatList">
             <span v-for="chat in chatsList" :key="chat.id" class="__chatItem">
               <ChatItem :chat="chat" @onClickToViewInboxFromChild="returnChatObject" />
@@ -53,14 +53,20 @@ export default {
             {
               received: "Hey man",
               sent: "Hey, sup?",
+              timeStampSent: "15:05",
+              timeStampReceived: "11:24",
             },
             {
               received: "Yumm! Yammy, i guess you enjoyed, lol",
               sent: "Not really, was not enough for me.. lol😂😂",
+              timeStampSent: "01:05",
+              timeStampReceived: "15:24",
             },
             {
               received: "😂 ... as much as i thought",
               sent: "... you know me!",
+              timeStampSent: "10:05",
+              timeStampReceived: "19:24",
             },
           ],
         },
@@ -78,18 +84,26 @@ export default {
             {
               received: "你好",
               sent: "你好,怎么样?",
+              timeStampSent: "18:05",
+              timeStampReceived: "10:24",
             },
             {
               received: "好久不见",
               sent: "对呀, 好久不见! 你最近在忙什么？",
+              timeStampSent: "17:50",
+              timeStampReceived: "07:05",
             },
             {
               received: "没什么，你呢？",
               sent: "一样的，没什么特别的!",
+              timeStampSent: "15:05",
+              timeStampReceived: "13:24",
             },
             {
               received: "好的, 你什么时候回中国?",
               sent: "我还不确定什么时候, 但我一定会让你知道!",
+              timeStampSent: "23:05",
+              timeStampReceived: "15:24",
             },
           ],
         },
@@ -107,19 +121,27 @@ export default {
             {
               received: "Yo bro",
               sent: "Yo",
+              timeStampSent: "10:05",
+              timeStampReceived: "11:24",
             },
             {
               received: "What's up?",
               sent: "nothing much",
+              timeStampSent: "18:05",
+              timeStampReceived: "11:24",
             },
             {
               received:
                 "I heard you are building a whatapp clone, lol! Courage! Hehehe",
               sent: "Yeah i am, and almost done, just working on the ui tho, no backend",
+              timeStampSent: "15:05",
+              timeStampReceived: "11:24",
             },
             {
               received: "Oh, i see",
               sent: "yeah",
+              timeStampSent: "18:05",
+              timeStampReceived: "18:24",
             },
           ],
         },
@@ -137,18 +159,26 @@ export default {
             {
               received: "Yo Wowo man",
               sent: "Yo man",
+              timeStampSent: "15:05",
+              timeStampReceived: "11:24",
             },
             {
               received: "You fit get 5k for your momo?",
               sent: "No man, sorry!",
+              timeStampSent: "15:05",
+              timeStampReceived: "11:24",
             },
             {
               received: "No worries man, ah go hustle different man",
               sent: "okay pa!",
+              timeStampSent: "15:05",
+              timeStampReceived: "11:24",
             },
             {
               received: "Thanks though",
               sent: "No problem",
+              timeStampSent: "15:05",
+              timeStampReceived: "11:24",
             },
           ],
         },
@@ -238,6 +268,11 @@ export default {
           item.totalMessagesInChat = 0;
         }
       });
+    },
+
+    // function to filter chat list
+    filterChatList(searchTerm) {
+      console.log("searchTerm from child component => " + searchTerm);
     },
   },
   mounted: function () {
