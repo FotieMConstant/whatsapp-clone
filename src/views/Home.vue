@@ -191,7 +191,7 @@ export default {
           blueCheck: false,
           lastSeen: "09:50",
           displayPicture:
-            "https://scontent-mia3-2.xx.fbcdn.net/v/t1.6435-9/84344710_2670283533089122_8563703457196802048_n.jpg?_nc_cat=103&ccb=1-3&_nc_sid=09cbfe&_nc_eui2=AeFxCXRixyMYvbpiB2FgVrd4NrDlHB9fwh82sOUcH1_CH8jJft9hB_TPHOL4k6u1U2pViviffRaDA6jYam4jOOTC&_nc_ohc=O6iegNbeYzEAX_1rUqD&tn=5Ushp77egCFD4k9U&_nc_ht=scontent-mia3-2.xx&oh=446b9a57395606b91581357ee8379425&oe=60D06711",
+            "https://www.cyphercoders.com/sites/default/files/default_images/default-user-icon-4.jpg",
           messages: [],
         },
         {
