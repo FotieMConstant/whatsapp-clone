@@ -195,8 +195,10 @@ export default {
           content.scrollTop
       );
     },
+    // delete a chat function
     deleteChat() {
       console.log("deleteChat");
+      // pick the chat and delete it from the array
       this.chatsList.map((item, index) => {
         if (item.id == this.chat.id) {
           this.chatsList.splice(index, 1);
